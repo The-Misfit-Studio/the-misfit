@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "babylonjs": "^5.3.0",
+    "babylonjs-gui": "^5.3.0"
+  },
+  "scripts": {
+    "deploy": "npm install"
+  }
+}

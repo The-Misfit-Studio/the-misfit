@@ -1,0 +1,10 @@
+version: "3.5"
+
+services:
+  bot:
+    image: the-misfit
+    restart: unless-stopped
+    ports:
+      - "5001:5001"
+    build: .
+    command: node server.js
