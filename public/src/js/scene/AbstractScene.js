@@ -95,7 +95,7 @@ export default class AbstractScene extends BABYLON.Scene {
         }
     }
 
-    setupMeshes() {
+    setupMeshes(reload=false) {
         for (let i = 0; i < this.meshToProcess.length; i++) {
             let mesh = this.meshToProcess[i];
             if (mesh.name.includes("Tuto")) {
@@ -145,7 +145,7 @@ export default class AbstractScene extends BABYLON.Scene {
                 mesh.material = testMaterial;
             }
 
-            this.addMeshToScene(mesh);
+            this.addMeshToScene(mesh, reload);
         }
     }
 
@@ -156,8 +156,9 @@ export default class AbstractScene extends BABYLON.Scene {
     /**
      *
      * @param mesh
+     * @param reload
      */
-    addMeshToScene(mesh) {
+    addMeshToScene(mesh, reload) {
         if (!mesh.name.includes("Wall")) {
             mesh.visibility = 0;
         }
@@ -167,7 +168,7 @@ export default class AbstractScene extends BABYLON.Scene {
             this.setTrapGameOver(mesh);
         } else if (mesh.name.includes("SpawnHero")) {
             // nothing for now
-        } else if (mesh.name.includes("WallTile")) {
+        } else if (!reload && mesh.name.includes("WallTile")) {
             let dist = 6;
             var testMaterial = new BABYLON.StandardMaterial("testMaterial", this);
 

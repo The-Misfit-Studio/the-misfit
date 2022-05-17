@@ -336,7 +336,7 @@ export default class GameScene extends AbstractScene {
                 mesh.physicsImpostor.dispose();
             }
         }
-        this.setupMeshes();
+        this.setupMeshes(true);
 
         GameState.state = GameState.WAIT_START;
         this.gui.advancedTexture.dispose();
