@@ -5,6 +5,7 @@ ainsi que la [mineure DS4H](https://ds4h.univ-cotedazur.eu/education/minor-progr
 par le professeur **Michel Buffa**.
 
 Lien du jeu en ligne : https://the-misfit.dylann.fr/
+Si le lien fonctionne pas : https://the-misfit.vidalmazuy.fr/
 
 **Jeu de plateforme de type [Die And Retry](https://fr.wikipedia.org/wiki/Die_and_retry).**
 
