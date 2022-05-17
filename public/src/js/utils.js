@@ -29,7 +29,7 @@ class GameOptions {
     static heroImpostor = {
         mass: 100,
         friction: 0,
-        restitution: 0
+        restitution: 0.4
     };
 
     static groundWallImpostor = {
@@ -86,17 +86,17 @@ class GameLevel {
 
     static getLevelByName(name) {
         switch (name) {
-            case "Level1.babylon":
+            case "Level1":
                 return GameLevel.level1;
-            case "Level2.babylon":
+            case "Level2":
                 return GameLevel.level2;
-            case "Level3.babylon":
+            case "Level3":
                 return GameLevel.level3;
-            case "Level4.babylon":
+            case "Level4":
                 return GameLevel.level4;
-            case "Level5.babylon":
+            case "Level5":
                 return GameLevel.level5;
-            case "Level6.babylon":
+            case "Level6":
                 return GameLevel.level6;
         }
     }
@@ -112,7 +112,7 @@ class GameLevel {
         if (type === GameLevel.HELL) {
             return "HeroAngelHalo";
         }
-        return "DemonHeroHorn";
+        return "HeroDemonHorn";
     }
 
     static getHeroBodyTextureByType(type) {
@@ -144,11 +144,11 @@ class GameLevel {
     }
 
     static level1 = {
-        type: GameLevel.HEAVEN,
-        spell1_slot: 2,
-        spell2_slot: 1,
+        type: GameLevel.HELL,
+        spell1_slot: 4,
+        spell2_slot: 4,
         isTuto: true,
-        heroLife: 1
+        heroLife: 3
     };
     static level2 = {
         type: GameLevel.HELL,
