@@ -50,7 +50,8 @@ export default class MenuScene extends AbstractScene {
 
     async optionsMenu() {
         let advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("mainMenuUI", true, this);
-        let loadedGUI = await advancedTexture.parseFromSnippetAsync("4D0KHU#45");
+        let loadedGUI = await advancedTexture.parseFromURLAsync("./assets/ui/json/optionsMenuUI.json");
+
 
         addUIControlMenuButton(advancedTexture, "cross", "Red", async () => {
             await this.mainMenu()

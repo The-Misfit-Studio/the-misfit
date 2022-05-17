@@ -43,7 +43,7 @@ export default class Tuto {
             case "TutoDoubleJump.001":
             case "TutoDoubleJump":
                 this.createTuto(mesh, new BABYLON.Vector3(10, 5, 1), 2,23,
-                    "Faites un Double Saut !\n " +
+                    "Faites un double saut !\n " +
                     "J ou Maj"
                 )
                 break;
@@ -57,7 +57,7 @@ export default class Tuto {
                 button = this.createTuto(mesh, new BABYLON.Vector3(20, 10, 1), 2, 10,
                     "Bienvenue dans MistFit !\nVous allez jouer un ange et un démon perdu...\n" +
                     "Les 2 personnages ont des sorts différents !\n" +
-                    "Découvrons les avec se tutoriel...\n" +
+                    "Découvrons les avec ce tutoriel...\n" +
                     "Attention vous n'avez qu'une vie !\n\n" +
                     "Touches :\n" +
                     "Saut: Espace / ↑ | Droite: Q / → | Gauche: D / ←\n" +
@@ -72,8 +72,8 @@ export default class Tuto {
                     "Bienvenue en enfer...\n" +
                     "Vous vous sentez revigoré...\n" +
                     "Vous avez un peu plus de vie !\n\n" +
-                    "Votre moitiée ange s'est perdu dans les enfers.\n" +
-                    "Aider le à retouver le paradis !\n" +
+                    "Votre moitiée ange s'est perdue dans les enfers.\n" +
+                    "Aidez le à retrouver le paradis !\n" +
                     "Votre 1er sort est une impulsion !\n" +
                     "Vous irez plus loin avec...\n" +
                     "Attention il fait sombre ici...\n" +

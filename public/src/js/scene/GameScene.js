@@ -152,8 +152,7 @@ export default class GameScene extends AbstractScene {
             this
         );
 
-        // await advancedTexture.parseFromURLAsync("./assets/ui/json/inGameUI.json");
-        await advancedTexture.parseFromSnippetAsync("HT0ZD6#2");
+        await advancedTexture.parseFromURLAsync("./assets/ui/json/inGameUI.json");
         this.setupUI(advancedTexture);
 
         for (let i = 0; i < 10; i++) {
