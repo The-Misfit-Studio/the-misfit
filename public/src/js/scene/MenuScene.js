@@ -95,7 +95,7 @@ export default class MenuScene extends AbstractScene {
                         alert("Niveau pas encore implémenté");
                     } else {
                         advancedTexture.dispose();
-                        progress.currentSelectedPath = "Level" + levelIndex + ".babylon";
+                        progress.currentSelectedPath = "Level" + levelIndex + ".json";
                         progress.currentSelectedLevel = "Level" + levelIndex;
 
                         GameState.state = GameState.STARTING;

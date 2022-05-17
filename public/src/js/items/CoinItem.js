@@ -2,14 +2,8 @@ import AbstractItem from "./AbstractItem.js";
 
 export default class CoinItem extends AbstractItem {
 
-    /**
-     *
-     * @param meshName
-     * @param scene
-     * @param gameLevelType
-     */
-    constructor(meshName, scene, gameLevelType) {
-        super(meshName, scene, gameLevelType);
+    constructor(entry, scene, gameLevelType) {
+        super(entry, scene, gameLevelType);
     }
 
     effect() {
