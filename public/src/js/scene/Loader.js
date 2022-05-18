@@ -1,6 +1,8 @@
 import {GameLevel, GameOptions, GameState, progress} from "../utils.js";
 import Hero from "../hero.js";
 import CoinItem from "../items/CoinItem.js";
+import TextureLoader from "./TextureLoader.js";
+import TutoLoader from "./TutoLoader.js";
 
 export default class Loader {
 
@@ -10,6 +12,8 @@ export default class Loader {
     constructor(scene, engine) {
         this.scene = scene;
         this.engine = engine;
+        this.textureLoader = new TextureLoader(scene);
+        this.tutoLoader = new TutoLoader(scene);
         this.instances = [];
         this.items = [];
         this.jsonFile = progress.currentSelectedPath;
@@ -35,7 +39,7 @@ export default class Loader {
                 if (mesh.animations.length > 0) {
                     mesh.animations = mesh.animations.filter(anim => anim.targetProperty === 'rotation');
                 }
-                this.setTexture(mesh);
+                this.textureLoader.setTexture(mesh);
             });
             this.scene.hero = new Hero(this.scene);
             this.setupLevel();
@@ -46,55 +50,14 @@ export default class Loader {
         this.scene.assetsManager.load();
     }
 
-    setTexture(mesh) {
-        let material = new BABYLON.StandardMaterial("testMaterial", this.scene);
-        if (mesh.name === "SpikeTileSpike") {
-            material.diffuseColor = new BABYLON.Color3(0, 0, 0);
-            material.specularColor = new BABYLON.Color3(1, 1, 1);
-            mesh.material = material;
-        } else if (mesh.name === "SpikeTileTile") {
-            material.diffuseColor = new BABYLON.Color3(0.7, 0.7, 0.7);
-            material.specularColor = new BABYLON.Color3(1, 1, 1);
-            mesh.material = material;
-        } else if (mesh.name === "GroundTileHell") {
-            material.diffuseTexture = new BABYLON.Texture("./models/scene/GroundTileHell.jpg", this.scene);
-            mesh.material = material;
-        } else if (mesh.name === "WallTileHell") {
-            material.diffuseTexture = new BABYLON.Texture("./models/scene/WallTileHell.jpg", this.scene);
-            mesh.material = material;
-        }
-        else if (mesh.name === "GroundTileHeaven1") {
-            material.diffuseTexture = new BABYLON.Texture("./models/scene/GroundTileHeaven1.jpg", this.scene);
-            mesh.material = material;
-        }
-        else if (mesh.name === "GroundTileHeaven2") {
-            material.diffuseTexture = new BABYLON.Texture("./models/scene/GroundTileHeaven2.jpg", this.scene);
-            mesh.material = material;
-        }
-        else if (mesh.name === "CoinHell") {
-            material.diffuseColor = new BABYLON.Color3(1, 0.1, 0.4);
-            mesh.material = material;
-        }
-        else if (mesh.name === "CoinHeaven") {
-            material.diffuseColor = new BABYLON.Color3(0.2, 1, 1);
-            mesh.material = material;
-        }
-        else if (mesh.name.includes("Trigger")) {
-            mesh.visibility = 0;
-        } else if (mesh.name.includes("SpinningBlade") && !mesh.name.includes("Tile")) {
-            material.diffuseTexture = new BABYLON.Texture("./models/scene/SpinningBlade.jpg", this.scene);
-            mesh.material = material;
-        }
-    }
-
     setupLevel() {
         for (let entry of this.jsonData) {
             let mesh = this.scene.getMeshByName(entry.name);
             this.setupProperties(entry, mesh);
         }
         if (this.scene.currentLevel.type === GameLevel.HELL) {
-            var skybox = BABYLON.MeshBuilder.CreateBox("skyBox", {size:2000.0}, this.scene);
-            var skyboxMaterial = new BABYLON.StandardMaterial("skyBox", this.scene);
+            let skybox = BABYLON.MeshBuilder.CreateBox("skyBox", {size:2000.0}, this.scene);
+            let skyboxMaterial = new BABYLON.StandardMaterial("skyBox", this.scene);
             skyboxMaterial.backFaceCulling = false;
             skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture("./assets/textures/skybox/skybox", this.scene);
             skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
@@ -103,8 +66,8 @@ export default class Loader {
             skybox.material = skyboxMaterial;
         }
         else {
-            var skybox = BABYLON.MeshBuilder.CreateBox("skyBox", {size:2000.0}, this.scene);
-            var skyboxMaterial = new BABYLON.StandardMaterial("skyBox", this.scene);
+            let skybox = BABYLON.MeshBuilder.CreateBox("skyBox", {size:2000.0}, this.scene);
+            let skyboxMaterial = new BABYLON.StandardMaterial("skyBox", this.scene);
             skyboxMaterial.backFaceCulling = false;
             skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture("./assets/textures/skybox/skybox", this.scene);
             skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
@@ -131,8 +94,10 @@ export default class Loader {
             this.scene.beginAnimation(instance, 0, 40, true);
         } else if (entry.name.includes("Ground")) {
             this.setupGround(entry, mesh);
-
-        } else {
+        } else if (entry.name.includes("Tuto")) {
+            this.tutoLoader.processTuto(entry);
+        }
+        else {
             this.setupInstance(entry, mesh);
         }
     }
@@ -185,9 +150,10 @@ export default class Loader {
     }
 
     setupEndTrigger(entry, mesh) {
+        let instance = this.setupInstance(entry, mesh);
         this.scene.endScenePosition = entry.position;
-        mesh.actionManager = new BABYLON.ActionManager(this.scene);
-        mesh.actionManager.registerAction(
+        instance.actionManager = new BABYLON.ActionManager(this.scene);
+        instance.actionManager.registerAction(
             new BABYLON.ExecuteCodeAction(
                 {
                     trigger: BABYLON.ActionManager.OnIntersectionEnterTrigger,

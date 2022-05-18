@@ -1,7 +1,7 @@
 import {addUIControlMenuButton, GameLevel, GameOptions, GameState, progress} from "../utils.js";
 import Hero from "../hero.js";
 import {soundLoader} from "../sound.js";
-import Tuto from "./tuto.js";
+import TutoLoader from "./tutoLoader.js";
 
 export default class AbstractScene extends BABYLON.Scene {
 

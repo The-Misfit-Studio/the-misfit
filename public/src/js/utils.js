@@ -144,7 +144,7 @@ class GameLevel {
     }
 
     static level1 = {
-        type: GameLevel.HELL,
+        type: GameLevel.HEAVEN,
         spell1_slot: 4,
         spell2_slot: 4,
         isTuto: true,

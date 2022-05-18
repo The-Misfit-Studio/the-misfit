@@ -138,7 +138,7 @@ export default function createJson(babylonFile, canvas) {
     scene.assetsManager = new BABYLON.AssetsManager(scene);
     // this.currentLevel = GameLevel.getLevelByName(this.modelPath);
     let meshTask = scene.assetsManager.addMeshTask(
-        "loadingScene", "", "./models/modelsToLoad/", babylonFile);
+        "loadingScene", "", "./models/scene/", babylonFile);
 
     let jsonMesh = []
 

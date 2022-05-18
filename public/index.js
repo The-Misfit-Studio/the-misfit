@@ -106,6 +106,6 @@ function modifySettings() {
 }
 
 window.onload = () => {
-    // createJson("assets.babylon", canvas);
+    // createJson("Heaven1.babylon", canvas);
     startGame();
 }

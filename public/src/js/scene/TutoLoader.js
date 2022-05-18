@@ -1,5 +1,5 @@
 
-export default class Tuto {
+export default class TutoLoader {
 
     constructor(scene) {
         this.manager = new BABYLON.GUI.GUI3DManager(scene);
@@ -7,13 +7,15 @@ export default class Tuto {
         this.mainTuto = undefined;
     }
 
-    createTuto(mesh, sizeButton, scaleText, font, text) {
+    createTuto(entry, sizeButton, scaleText, font, text) {
         var anchor = new BABYLON.AbstractMesh("anchor", this.scene);
 
         var button = new BABYLON.GUI.Button3D("reset");
         this.manager.addControl(button);
         button.linkToTransformNode(anchor);
-        button.position = mesh.position.clone();
+        button.position.x = entry.position._x;
+        button.position.y = entry.position._y;
+        button.position.z = entry.position._z;
         button.scaling = sizeButton
 
         button.pointerEnterAnimation = null;
@@ -27,34 +29,33 @@ export default class Tuto {
         text1.fontSize = font;
         text1.scaleY = scaleText;
         button.content = text1;
-        mesh.dispose();
         return button;
     }
 
-    processTuto(mesh) {
+    processTuto(entry) {
         let button;
-        switch (mesh.name) {
+        switch (entry.name) {
             case "TutoJump":
-                this.createTuto(mesh, new BABYLON.Vector3(10, 5, 1), 2,23,
+                this.createTuto(entry, new BABYLON.Vector3(10, 5, 1), 2,23,
                     "Attention le trou, sautez !\n"+
                     "Espace ou ↑"
                 )
                 break;
             case "TutoDoubleJump.001":
             case "TutoDoubleJump":
-                this.createTuto(mesh, new BABYLON.Vector3(10, 5, 1), 2,23,
+                this.createTuto(entry, new BABYLON.Vector3(10, 5, 1), 2,23,
                     "Faites un double saut !\n " +
                     "J ou Maj"
                 )
                 break;
             case "TutoShield":
-                this.createTuto(mesh, new BABYLON.Vector3(10, 5, 1), 2,23,
+                this.createTuto(entry, new BABYLON.Vector3(10, 5, 1), 2,23,
                     "Activez votre bouclier !\n" +
                     "K ou Ctrl"
                 )
                 break;
             case "TutoMain":
-                button = this.createTuto(mesh, new BABYLON.Vector3(20, 10, 1), 2, 10,
+                button = this.createTuto(entry, new BABYLON.Vector3(20, 10, 1), 2, 10,
                     "Bienvenue dans MistFit !\nVous allez jouer un ange et un démon perdu...\n" +
                     "Les 2 personnages ont des sorts différents !\n" +
                     "Découvrons les avec ce tutoriel...\n" +
@@ -68,7 +69,7 @@ export default class Tuto {
                 this.mainTuto = button;
                 break;
             case "TutoMain2":
-                button = this.createTuto(mesh, new BABYLON.Vector3(20, 10, 1), 2, 9,
+                button = this.createTuto(entry, new BABYLON.Vector3(20, 10, 1), 2, 9,
                     "Bienvenue en enfer...\n" +
                     "Vous vous sentez revigoré...\n" +
                     "Vous avez un peu plus de vie !\n\n" +
@@ -84,7 +85,7 @@ export default class Tuto {
                 this.mainTuto = button;
                 break;
             case "TutoKeepSpell":
-                this.createTuto(mesh, new BABYLON.Vector3(10, 5, 1), 2, 18,
+                this.createTuto(entry, new BABYLON.Vector3(10, 5, 1), 2, 18,
                     "Utilisez vos sort intelligemment !\n" +
                     "Vous en aurez besoin..."
                 );

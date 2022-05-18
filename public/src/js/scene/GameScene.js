@@ -10,7 +10,6 @@ import {
 import AbstractScene from "./AbstractScene.js";
 import {soundLoader} from "../sound.js";
 import Hero from "../hero.js";
-import Tuto from "./tuto.js";
 import Loader from "./Loader.js";
 
 export default class GameScene extends AbstractScene {
@@ -112,6 +111,7 @@ export default class GameScene extends AbstractScene {
     }
 
     async createGUI() {
+
         let advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI(
             "mainMenuUI",
             true,
@@ -138,7 +138,6 @@ export default class GameScene extends AbstractScene {
         setupBlackScreen(recs, h, w, sizePx, 1, advancedTexture);
 
         let startButton = advancedTexture.getControlByName("startButton");
-
         advancedTexture.removeControl(startButton);
         advancedTexture.addControl(startButton);
         addUIControlMenuButton(advancedTexture, "start", "Blue", () => {
@@ -151,9 +150,11 @@ export default class GameScene extends AbstractScene {
             this.hero.updateHeart();
 
             startButton.dispose();
-            // if (this.currentLevel.isTuto) {
-            //     this.tuto.mainTuto.dispose();
-            // }
+
+            console.log(this.loader.tutoLoader.mainTuto);
+            if (this.currentLevel.isTuto) {
+                this.loader.tutoLoader.mainTuto.isVisible = false;
+            }
             this.canvas.requestPointerLock();
             let lenRec = recs.length;
             let i = 0;
@@ -252,9 +253,9 @@ export default class GameScene extends AbstractScene {
         this.hero = new Hero(this);
         this.createGUI();
 
-        // if (this.currentLevel.isTuto) {
-        //     this.tuto = new Tuto(this);
-        // }
+        if (this.currentLevel.isTuto) {
+            this.loader.tutoLoader.mainTuto.isVisible = true;
+        }
 
         this.loader.setupRestart();
 
