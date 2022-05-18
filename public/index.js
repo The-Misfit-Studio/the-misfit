@@ -106,6 +106,6 @@ function modifySettings() {
 }
 
 window.onload = () => {
-    // createJson("Heaven1.babylon", canvas);
+    // createJson("Hell2.babylon", canvas);
     startGame();
 }

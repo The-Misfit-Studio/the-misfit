@@ -151,7 +151,6 @@ export default class GameScene extends AbstractScene {
 
             startButton.dispose();
 
-            console.log(this.loader.tutoLoader.mainTuto);
             if (this.currentLevel.isTuto) {
                 this.loader.tutoLoader.mainTuto.isVisible = false;
             }

@@ -39,6 +39,7 @@ export default class Loader {
                 if (mesh.animations.length > 0) {
                     mesh.animations = mesh.animations.filter(anim => anim.targetProperty === 'rotation');
                 }
+
                 this.textureLoader.setTexture(mesh);
             });
             this.scene.hero = new Hero(this.scene);
@@ -52,6 +53,7 @@ export default class Loader {
 
     setupLevel() {
         for (let entry of this.jsonData) {
+
             let mesh = this.scene.getMeshByName(entry.name);
             this.setupProperties(entry, mesh);
         }
