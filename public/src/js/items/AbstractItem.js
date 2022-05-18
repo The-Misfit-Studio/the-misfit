@@ -2,39 +2,30 @@ import {GameLevel, GameOptions} from "../utils.js";
 import {soundLoader} from "../sound.js";
 
 export default class AbstractItem {
-    /**
-     *
-     * @param{number} position
-     * @param{BABYLON.Scene} scene
-     * @param gameLevelType
-     */
-    constructor(position, scene, gameLevelType) {
-        this.oldPos = position;
+
+    constructor(entry, scene, gameLevelType) {
+        this.entry = entry;
         this.scene = scene;
         this.gameLevelType = gameLevelType;
-        this.mesh = undefined;
+        this.coin = undefined;
         this.setupItem();
     }
 
     setupItem() {
-        let coinMaterial = new BABYLON.StandardMaterial("CoinMaterial", this.scene);
         let coinMesh;
         if (this.gameLevelType === GameLevel.HELL) {
-            coinMesh = this.scene.getMeshByName("CoinHeaven").clone();
-            coinMaterial.diffuseColor = new BABYLON.Color3(0.2, 1, 1);
-
+            coinMesh = this.scene.getMeshByName("CoinHeaven")
         }
         else {
-            coinMesh = this.scene.getMeshByName("CoinHell").clone();
-            coinMaterial.diffuseColor = new BABYLON.Color3(1, 0.1, 0.4);
-
+            coinMesh = this.scene.getMeshByName("CoinHell")
         }
-        this.mesh = coinMesh;
-        this.mesh.material = coinMaterial;
-        this.mesh.position = this.oldPos;
-        this.mesh.visibility = 1;
-        this.mesh.actionManager = new BABYLON.ActionManager(this.scene);
-        this.mesh.actionManager.registerAction(
+        this.coin = coinMesh.createInstance("CoinInstance");
+        this.coin.position = this.entry.position;
+        this.coin.rotation = this.entry.rotation;
+        this.scene.beginAnimation(this.coin, 0, 40, true);
+
+        this.coin.actionManager = new BABYLON.ActionManager(this.scene);
+        this.coin.actionManager.registerAction(
             new BABYLON.ExecuteCodeAction(
                 {
                     trigger: BABYLON.ActionManager.OnIntersectionEnterTrigger,
@@ -44,11 +35,10 @@ export default class AbstractItem {
                 },
                 () => {
                     this.effect();
-                    this.mesh.dispose();
+                    this.coin.dispose();
                 }
             )
         );
-
     }
 
     effect() {

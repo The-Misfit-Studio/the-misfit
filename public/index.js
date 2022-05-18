@@ -2,6 +2,7 @@ import {GameState, progress} from "./src/js/utils.js";
 import GameScene from "./src/js/scene/GameScene.js";
 import MenuScene from "./src/js/scene/MenuScene.js";
 import {soundLoader} from "./src/js/sound.js";
+import createJson from "./src/js/loadingJsonBlender.js";
 
 let engine;
 let scene;
@@ -31,8 +32,7 @@ function gameLoop() {
                 GameState.state = GameState.IN_MENU;
                 break;
             case GameState.STARTING:
-                scene = new GameScene(progress.currentSelectedPath, engine, canvas);
-                scene.loadScene();
+                scene = new GameScene(engine, canvas);
                 break;
             case GameState.LOADING:
                 // do nothing but loading
@@ -105,12 +105,7 @@ function modifySettings() {
     canvas.addEventListener("wheel", evt => evt.preventDefault());
 }
 
-
 window.onload = () => {
+    // createJson("Hell2.babylon", canvas);
     startGame();
-    // window.addEventListener('click', function load(event) {
-    //     start.remove();
-    //     window.removeEventListener('click', load);
-    //
-    // });
 }

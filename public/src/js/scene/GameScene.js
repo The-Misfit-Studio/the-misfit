@@ -10,25 +10,25 @@ import {
 import AbstractScene from "./AbstractScene.js";
 import {soundLoader} from "../sound.js";
 import Hero from "../hero.js";
-import Tuto from "./tuto.js";
-import CoinItem from "../items/CoinItem.js";
+import Loader from "./Loader.js";
 
 export default class GameScene extends AbstractScene {
 
-    constructor(modelPath, engine, canvas) {
-        super(modelPath, engine, canvas);
+    constructor(engine, canvas) {
+        super(engine, canvas);
 
-        this.zone = this.createLoadingZone();
         this.score = 0;
-        this.sphereList = [];
         this.gui = {};
         this.hero = null;
         this.center = null;
         this.typePath = undefined;
         this.progressBar = [];
-        this.levelName = modelPath;
         this.currentLevel = undefined;
         this.isGameOver = false;
+        this.assetsManager = new BABYLON.AssetsManager(this);
+        this.currentLevel = GameLevel.getLevelByName(progress.currentSelectedLevel);
+        this.loader = new Loader(this, engine)
+        this.loader.load();
 
         this.enablePhysics(
             new BABYLON.Vector3(0, GameOptions.gravity, 0)
@@ -95,31 +95,6 @@ export default class GameScene extends AbstractScene {
         }
     }
 
-    loadAssets() {
-        super.loadAssets();
-        this.currentLevel = GameLevel.getLevelByName(this.modelPath);
-        let meshTask = this.assetsManager.addMeshTask(
-            "loadingScene", "", "./models/scene/", this.modelPath);
-        let meshHero = this.assetsManager.addMeshTask(
-            "loadingHero", "", "./models/hero/",
-            GameLevel.getBabylonHeroByType(this.currentLevel.type));
-
-        meshTask.onSuccess = (task) => {
-            task.loadedMeshes.forEach(mesh => {
-                if (mesh.name.includes("SpawnCoin")) {
-                    this.coinPos.push(mesh.position.clone());
-                    mesh.dispose();
-                }
-                else {
-                    this.meshToProcess.push(mesh);
-                }
-            })
-        }
-        meshHero.onSuccess = (taskHero) => {
-
-        }
-    }
-
     setupHeart(advancedTexture) {
         this.hearts = [6];
         for (let i = 1; i <= 3; i++) {
@@ -135,17 +110,8 @@ export default class GameScene extends AbstractScene {
         }
     }
 
-    setupCoin() {
-        for (let i = 0; i < this.items.length; i++) {
-            this.items[i].mesh.dispose();
-        }
-        this.items = [];
-        for (let i = 0; i < this.coinPos.length; i++) {
-            this.items.push(new CoinItem(this.coinPos[i], this, this.currentLevel.type));
-        }
-    }
-
     async createGUI() {
+
         let advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI(
             "mainMenuUI",
             true,
@@ -172,7 +138,6 @@ export default class GameScene extends AbstractScene {
         setupBlackScreen(recs, h, w, sizePx, 1, advancedTexture);
 
         let startButton = advancedTexture.getControlByName("startButton");
-
         advancedTexture.removeControl(startButton);
         advancedTexture.addControl(startButton);
         addUIControlMenuButton(advancedTexture, "start", "Blue", () => {
@@ -183,11 +148,11 @@ export default class GameScene extends AbstractScene {
             }
             soundLoader.sceneMusic.pause();
             this.hero.updateHeart();
-            this.setupCoin();
 
             startButton.dispose();
+
             if (this.currentLevel.isTuto) {
-                this.tuto.mainTuto.dispose();
+                this.loader.tutoLoader.mainTuto.isVisible = false;
             }
             this.canvas.requestPointerLock();
             let lenRec = recs.length;
@@ -206,15 +171,6 @@ export default class GameScene extends AbstractScene {
                 }
             }, 5);
         },)
-
-        var skybox = BABYLON.MeshBuilder.CreateBox("skyBox", {size:2000.0}, this);
-        var skyboxMaterial = new BABYLON.StandardMaterial("skyBox", this);
-        skyboxMaterial.backFaceCulling = false;
-        skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture("./assets/textures/skybox/skybox", this);
-        skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
-        skyboxMaterial.diffuseColor = new BABYLON.Color3(0, 0, 0);
-        skyboxMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
-        skybox.material = skyboxMaterial;
 
         this.render();
         this.gui.advancedTexture = advancedTexture;
@@ -292,6 +248,20 @@ export default class GameScene extends AbstractScene {
         }, 5);
     }
 
+    restart() {
+        this.hero = new Hero(this);
+        this.createGUI();
+
+        if (this.currentLevel.isTuto) {
+            this.loader.tutoLoader.mainTuto.isVisible = true;
+        }
+
+        this.loader.setupRestart();
+
+        GameState.state = GameState.WAIT_START;
+        this.gui.advancedTexture.dispose();
+        this.isGameOver = false;
+    }
 
     moveLight() {
         this.light.intensity = GameOptions.baseLightHell;
@@ -299,10 +269,6 @@ export default class GameScene extends AbstractScene {
         this.light.position.y += 15;
         this.secondLight.position = this.hero.heroMesh.position.clone()
         this.secondLight.position.y += 15;
-
-        // this.light.intensity = 0.4 + Math.random() * 0.1;
-        // this.light.position.x += Math.random() * 0.125 - 0.0625;
-        // this.light.position.z += Math.random() * 0.125 - 0.0625;
     }
 
     computeScene() {
@@ -315,31 +281,8 @@ export default class GameScene extends AbstractScene {
                 this.moveLight();
             }
 
-            this.zone.position = this.hero.heroMesh.position.clone();
-            this.zone.position.z = this.hero.heroMesh.position.z + 70;
             this.updateProgressBar();
         }
     }
 
-    restart() {
-        this.zone = this.createLoadingZone();
-        this.hero = new Hero(this);
-        this.createGUI();
-
-        if (this.currentLevel.isTuto) {
-            this.tuto = new Tuto(this);
-        }
-
-        for (let i = 0; i < this.meshToProcess.length; i++) {
-            let mesh = this.meshToProcess[i];
-            if (mesh.name.includes("Ground") && mesh.physicsImpostor !== undefined) {
-                mesh.physicsImpostor.dispose();
-            }
-        }
-        this.setupMeshes(true);
-
-        GameState.state = GameState.WAIT_START;
-        this.gui.advancedTexture.dispose();
-        this.isGameOver = false;
-    }
 }

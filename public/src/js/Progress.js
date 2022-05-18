@@ -124,7 +124,7 @@ class Progress {
     }
 
     nextLevel() {
-        this.currentSelectedPath = `Level${progress.levelsCompleted.length + 1}.babylon`;
+        this.currentSelectedPath = `Level${progress.levelsCompleted.length + 1}.json`;
         this.currentSelectedLevel = `Level${progress.levelsCompleted.length + 1}`;
     }
 
@@ -139,7 +139,7 @@ class Progress {
     resetProgression() {
         this.levelsCompleted = [];
         this.currentSelectedLevel = "Level1";
-        this.currentSelectedLevelPath = "Level1.babylon";
+        this.currentSelectedLevelPath = "Level1.json";
         this.totalCoins = 0;
     }
 

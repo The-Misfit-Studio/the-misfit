@@ -17,19 +17,19 @@ export default class Hero {
         this.speed = GameOptions.heroSpeed;
         this.spells = new SpellHolster(this.scene);
 
-        this.center = this.scene.getMeshByName("GroundTileStart.002").position;
+        this.center = this.scene.getMeshByName("StartMiddle").position;
         this.scene.center = this.center.x;
         this._cursor = 1;
         this._oldCursor = 1;
         this._sides = {
             0: {
-                "coords": this.scene.getMeshByName("GroundTileStart.001").position
+                "coords": this.scene.getMeshByName("StartLeft").position
             },
             1: {
                 "coords": this.center
             },
             2: {
-                "coords": this.scene.getMeshByName("GroundTileStart.003").position
+                "coords": this.scene.getMeshByName("StartRight").position
             }
         }
 
@@ -43,14 +43,6 @@ export default class Hero {
         this._tmpCoins++;
     }
 
-
-    set isMoving(value) {
-        this._isMoving = value;
-    }
-
-    get isMoving() {
-        return this._isMoving;
-    }
 
     /**
      *
@@ -68,7 +60,6 @@ export default class Hero {
         this.heroMesh.material = body;
         this.heroMesh.alpha = 0.4;
 
-        // console.log(body.diffuseTexture);
 
         this.hatMesh = this.scene.getMeshByName(GameLevel.getHeroHatByLevelType(type));
         let hat = new BABYLON.StandardMaterial("body", this.scene);
@@ -90,7 +81,6 @@ export default class Hero {
 
     createBounder() {
         this.bounder = new BABYLON.MeshBuilder.CreateSphere("bounderHero", GameOptions.heroBounder, this.scene);
-        // let bounderMaterial = new BABYLON.StandardMaterial("bounderTankMaterial", this.scene);
 
         this.bounder.position = this.heroMesh.position.clone();
         this.bounder.visibility = false;
