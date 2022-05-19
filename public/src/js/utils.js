@@ -145,17 +145,17 @@ class GameLevel {
 
     static level1 = {
         type: GameLevel.HEAVEN,
-        spell1_slot: 4,
-        spell2_slot: 4,
+        spell1_slot: 2,
+        spell2_slot: 1,
         isTuto: true,
-        heroLife: 3
+        heroLife: 1
     };
     static level2 = {
         type: GameLevel.HELL,
-        spell1_slot: 2,
-        spell2_slot: 3,
+        spell1_slot: 3,
+        spell2_slot: 4,
         isTuto: true,
-        heroLife: 2
+        heroLife: 3
     };
     static level3 = {
         type: GameLevel.HEAVEN,
