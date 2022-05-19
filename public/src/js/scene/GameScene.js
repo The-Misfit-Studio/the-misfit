@@ -144,9 +144,10 @@ export default class GameScene extends AbstractScene {
 
             soundLoader.playSound(this.currentStartMusic);
             this.currentStartMusic.onended = () => {
-                soundLoader.playSound(this.currentMusic);
+                if (GameState.state === GameState.IN_GAME) {
+                    soundLoader.playSound(this.currentMusic);
+                }
             }
-            soundLoader.sceneMusic.pause();
             this.hero.updateHeart();
 
             startButton.dispose();
@@ -190,6 +191,12 @@ export default class GameScene extends AbstractScene {
         document.exitPointerLock();
         this.currentMusic.pause();
         soundLoader.playSound(soundLoader.gameOverMusic);
+        soundLoader.gameOverMusic.onpause = () => {
+            console.log("GameState : ", GameState.state);
+            if (GameState.state === GameState.IN_GAME) {
+                soundLoader.playSound(soundLoader.sceneMusic);
+            }
+        }
 
         this.isGameOver = true;
         this.hero.bounder.dispose();
@@ -223,8 +230,9 @@ export default class GameScene extends AbstractScene {
         document.exitPointerLock();
         this.currentMusic.pause()
         soundLoader.playSound(soundLoader.winMusic);
-        soundLoader.gameOverMusic.onpause = () => {
-            if (soundLoader.sceneMusic.paused && GameState.state !== GameState.LOADING) {
+        soundLoader.winMusic.onpause = () => {
+            console.log("GameState : ", GameState.state);
+            if (GameState.state === GameState.IN_GAME) {
                 soundLoader.playSound(soundLoader.sceneMusic);
             }
         }

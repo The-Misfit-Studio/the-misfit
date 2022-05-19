@@ -116,6 +116,16 @@ class SoundLoader {
         }
     }
 
+    resetAllSound() {
+        for (let i = 0; i <this.musics.length; i++) {
+            this.musics[i].pause();
+        }
+        for (let i = 0; i <this.effects.length; i++) {
+            this.effects[i].pause();
+        }
+    }
+
+
     modifyEffectvolume(value) {
         this.modifyVolume(this.effects, value);
     }

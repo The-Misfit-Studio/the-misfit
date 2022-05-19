@@ -137,15 +137,14 @@ export default class MenuScene extends AbstractScene {
 
         addUIControlMenuButton(advancedTexture, "mainMenu", "Red", () => {
             this.mainMenu();
-            soundLoader.gameOverMusic.pause();
+            soundLoader.resetAllSound();
             advancedTexture.dispose();
         });
 
         addUIControlMenuButton(advancedTexture, "restart", "Red", () => {
             GameState.state = GameState.RESTARTING;
             advancedTexture.dispose()
-            soundLoader.sceneMusic.pause();
-            soundLoader.gameOverMusic.pause();
+            soundLoader.resetAllSound();
         });
     }
 
@@ -158,7 +157,7 @@ export default class MenuScene extends AbstractScene {
 
         addUIControlMenuButton(advancedTexture, "mainMenu", "Red", () => {
             this.mainMenu();
-            soundLoader.gameOverMusic.pause();
+            soundLoader.resetAllSound();
             advancedTexture.dispose();
         });
 
@@ -169,10 +168,12 @@ export default class MenuScene extends AbstractScene {
 
         addUIControlMenuButton(advancedTexture, "restart", "Red", () => {
             GameState.state = GameState.RESTARTING;
+            soundLoader.resetAllSound();
             advancedTexture.dispose();
         });
         addUIControlMenuButton(advancedTexture, "next", "Red",  async () => {
             if (progress.levelsCompleted.length < 4) {
+                soundLoader.resetAllSound();
                 advancedTexture.dispose();
                 progress.nextLevel();
                 GameState.state = GameState.STARTING;
