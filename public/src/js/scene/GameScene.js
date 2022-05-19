@@ -132,7 +132,7 @@ export default class GameScene extends AbstractScene {
 
         let h = this.canvas.height;
         let w = this.canvas.width;
-        let sizePx = 100;
+        let sizePx = 200;
         let recs = [];
 
         setupBlackScreen(recs, h, w, sizePx, 1, advancedTexture);
@@ -207,6 +207,10 @@ export default class GameScene extends AbstractScene {
             if (i >= len) {
                 clearInterval(interval);
                 GameState.state = GameState.GAME_OVER;
+                for (let j = 0; j < ellipses[j].length; j++) {
+                    ellipses[j].dispose();
+                }
+                ellipses = [];
             } else {
                 ellipses[i].alpha = 1;
                 i++;
@@ -229,7 +233,7 @@ export default class GameScene extends AbstractScene {
 
         let h = this.canvas.height;
         let w = this.canvas.width;
-        let sizePx = 100;
+        let sizePx = 200;
         let recs = [];
 
         setupBlackScreen(recs, h, w, sizePx, 0, this.gui.advancedTexture);
@@ -241,6 +245,9 @@ export default class GameScene extends AbstractScene {
                 clearInterval(interv);
                 progress.addCompletedLevel(progress.currentSelectedLevel);
                 GameState.state = GameState.WIN;
+                for (let j = 0; j < recs.length; j++) {
+                    recs[j].dispose();
+                }
             } else {
                 recs[i].alpha = 1;
                 i++;

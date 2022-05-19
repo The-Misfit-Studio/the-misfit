@@ -74,6 +74,7 @@ export default class AbstractScene extends BABYLON.Scene {
 
         addUIControlMenuButton(advancedTexture, "mainMenu", "Red", () => {
             GameState.state = GameState.START_MENU;
+            this.currentMusic.pause();
             soundLoader.gameOverMusic.pause();
             soundLoader.sceneMusic.pause();
             advancedTexture.dispose();
