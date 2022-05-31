@@ -17,6 +17,8 @@ class GameState {
     static WAIT_START = 8;
     static PAUSE = 9;
     static WIN = 10;
+    static CUTSCENE = 11;
+    static IN_CUTSCENE = 12;
 
     static state = GameState.START_MENU;
     static lastState = 0;

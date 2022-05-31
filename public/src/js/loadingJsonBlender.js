@@ -119,17 +119,17 @@ function download(content, fileName, contentType) {
     a.click();
 }
 
-function spawnCoin(scene, jsonMesh) {
-    let mesh = scene.getMeshByName("CoinHell");
-    for (let entry of jsonMesh) {
-        if (entry.name.includes("SpawnCoin")) {
-            let newCoin = mesh.createInstance('test');
-            newCoin.position = entry.position;
-            scene.beginAnimation(newCoin, 0, 40, true);
-        }
-
-    }
-}
+// function spawnCoin(scene, jsonMesh) {
+//     let mesh = scene.getMeshByName("CoinHell");
+//     for (let entry of jsonMesh) {
+//         if (entry.name.includes("SpawnCoin")) {
+//             let newCoin = mesh.createInstance('test');
+//             newCoin.position = entry.position;
+//             scene.beginAnimation(newCoin, 0, 40, true);
+//         }
+//
+//     }
+// }
 
 export default function createJson(babylonFile, canvas) {
     let engine = new BABYLON.Engine(canvas, true);

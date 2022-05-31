@@ -6,8 +6,8 @@ import TutoLoader from "./TutoLoader.js";
 
 export default class Loader {
 
-    static ASSETS_FILE_NAME = "assets.babylon"
-    static ASSETS_FILE_PATH = "./models/scene/"
+    static ASSETS_FILE_NAME = "assets.babylon";
+    static ASSETS_FILE_PATH = "./models/scene/";
 
     constructor(scene, engine) {
         this.scene = scene;

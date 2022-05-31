@@ -144,7 +144,7 @@ class Progress {
     }
 
     unlockLevels() {
-        for (let i = 1; i < 5; i++) {
+        for (let i = 1; i <= 6; i++) {
             this.addCompletedLevel(`Level${i}`)
         }
     }

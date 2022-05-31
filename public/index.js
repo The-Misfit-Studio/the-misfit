@@ -3,9 +3,11 @@ import GameScene from "./src/js/scene/GameScene.js";
 import MenuScene from "./src/js/scene/MenuScene.js";
 import {soundLoader} from "./src/js/sound.js";
 import createJson from "./src/js/loadingJsonBlender.js";
+import CutScene from "./src/js/scene/CutScene.js";
 
 let engine;
 let scene;
+let cinematic;
 let menuScene;
 // let divFps = document.getElementById("fps");
 let canvas = document.querySelector("#myCanvas");
@@ -48,6 +50,13 @@ function gameLoop() {
                 // scene.loadScene();
                 break;
             case GameState.OPTIONS:
+                break;
+            case GameState.IN_CUTSCENE:
+                cinematic.computeScene();
+                cinematic.render();
+                break;
+            case GameState.CUTSCENE:
+               cinematic = new CutScene(engine, canvas);
                 break;
             case GameState.IN_MENU:
                 menuScene.render();
@@ -106,6 +115,6 @@ function modifySettings() {
 }
 
 window.onload = () => {
-    // createJson("Heaven2Beta.babylon", canvas);
+    // createJson("SandBoxHeaven2.babylon", canvas);
     startGame();
 }

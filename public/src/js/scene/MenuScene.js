@@ -22,6 +22,9 @@ export default class MenuScene extends AbstractScene {
         }
 
         let advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("mainMenuUI", true, this);
+
+
+
         let loadedGUI = await advancedTexture.parseFromURLAsync("./assets/ui/json/mainMenuUI.json");
 
         let logo = advancedTexture.getControlByName("Logo");
@@ -91,18 +94,16 @@ export default class MenuScene extends AbstractScene {
                     state = "Unlocked";
                 }
                 addUIControlMenuButton(advancedTexture, name, state, () => {
-                    if (levelIndex > 4) {
-                        alert("Niveau pas encore implémenté");
-                    } else {
-                        advancedTexture.dispose();
-                        progress.currentSelectedPath = "Level" + levelIndex + ".json";
-                        progress.currentSelectedLevel = "Level" + levelIndex;
 
-                        GameState.state = GameState.STARTING;
-                        this.clearColor = new BABYLON.Color4(0, 0, 0);
-                        soundLoader.sceneMusic.pause();
-                        this.render();
-                    }
+                    advancedTexture.dispose();
+                    progress.currentSelectedPath = "Level" + levelIndex + ".json";
+                    progress.currentSelectedLevel = "Level" + levelIndex;
+
+                    GameState.state = GameState.CUTSCENE;
+                    this.clearColor = new BABYLON.Color4(0, 0, 0);
+                    soundLoader.sceneMusic.pause();
+                    this.render();
+
                 }, "levels", state);
 
             } else {
@@ -111,8 +112,8 @@ export default class MenuScene extends AbstractScene {
                 }, "levels", state);
             }
         }
-        window.addEventListener("keydown", async(e) => {
-            if (e.key === "²") {
+        window.addEventListener("keydown", async (e) => {
+            if (e.key === "²" || e.key === "m") {
                 progress.unlockLevels();
                 await this.levelMenu();
                 advancedTexture.dispose();
@@ -171,20 +172,14 @@ export default class MenuScene extends AbstractScene {
             soundLoader.resetAllSound();
             advancedTexture.dispose();
         });
-        addUIControlMenuButton(advancedTexture, "next", "Red",  async () => {
-            if (progress.levelsCompleted.length < 4) {
-                soundLoader.resetAllSound();
-                advancedTexture.dispose();
-                progress.nextLevel();
-                GameState.state = GameState.STARTING;
-                this.clearColor = new BABYLON.Color4(0, 0, 0);
-                this.render();
-            } else {
-                alert("Niveau pas encore implémenté");
-                await this.levelMenu();
-                advancedTexture.dispose();
-            }
+        addUIControlMenuButton(advancedTexture, "next", "Red", async () => {
 
+            soundLoader.resetAllSound();
+            advancedTexture.dispose();
+            progress.nextLevel();
+            GameState.state = GameState.CUTSCENE;
+            this.clearColor = new BABYLON.Color4(0, 0, 0);
+            this.render();
         });
     }
 }

@@ -97,6 +97,16 @@ class SoundLoader {
         this.heavenMusic.volume = 0.2;
         this.heavenMusic.alreadyPlayed = false;
         this.musics.push(this.hellStartMusic);
+
+        this.angel = new Audio("./assets/sound/angel.mp3");
+        this.angel.volume = 0.2;
+        this.angel.alreadyPlayed = false;
+        this.effects.push(this.angel);
+
+        this.satan = new Audio("./assets/sound/satan.mp3");
+        this.satan.volume = 0.2;
+        this.satan.alreadyPlayed = false;
+        this.effects.push(this.satan);
     }
 
     playSound(sound) {

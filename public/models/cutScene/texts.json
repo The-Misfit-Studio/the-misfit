@@ -1,0 +1,200 @@
+[
+  {
+    "level": "Level1",
+    "text": [
+      {
+        "isGodSpeaking": true,
+        "text": "Hmmm... Une nouvelle ame guerrière viens nous servir. Son passé est trouble pourtant, que doit donc être son future ?"
+      },
+      {
+        "isGodSpeaking": false,
+        "text": "Pfff ! Je ne prendrai pas cet enfant de coeur tombé en défendant les siens ! Cet espèce là, c'est plutôt pour toi."
+      },
+      {
+        "isGodSpeaking": true,
+        "text": "Alors ainsi soit-il."
+      },
+      {
+        "isGodSpeaking": true,
+        "text": "Elève toi dans ma lumière ! Reçoit ma grâce et goûte aujourd'hui à un repos durement mérité. Tes tourments prennent fin maintenant !"
+      },
+      {
+        "isGodSpeaking": false,
+        "text": "Hihihihi..."
+      }
+    ]
+  },
+  {
+    "level": "Level2",
+    "text": [
+      {
+        "isGodSpeaking": true,
+        "text": "Comment ?!! "
+      },
+      {
+        "isGodSpeaking": true,
+        "text": "Un démon dans mon royaume ?! Quelle ignominie !"
+      },
+      {
+        "isGodSpeaking": false,
+        "text": "Hahaha !"
+      },
+      {
+        "isGodSpeaking": false,
+        "text": "Je t'ai encore roulé !"
+      },
+      {
+        "isGodSpeaking": false,
+        "text": "Si tu avais juste lu la rage dans ses yeux, la fouge dans sa démarche, l'ardeur dans cette âme... Elle est parfaite pour servir mon royaume"
+      },
+      {
+        "isGodSpeaking": true,
+        "text": "Tant de mesquinerie de la part du supposé malin... Emporte donc cet être sombre et qu'il serve tes dessins odieux. Mes portes de perles lui seront à jamais fermées !"
+      },
+      {
+        "isGodSpeaking": false,
+        "text": "Sombre dans mon domaine ! Sens les tourments des damnés et repais toi de leur misère. Ton devoir éternel commence enfin ! "
+      }
+    ]
+  },
+  {
+    "level": "Level3",
+    "text": [
+      {
+        "isGodSpeaking": false,
+        "text": "Mais... Mais..."
+      },
+      {
+        "isGodSpeaking": false,
+        "text": "Mais que fait-elle ? Quelle est cette forme impure qu'elle arbore ? Quelle lumière amène-t-elle à mon antre ?!"
+      },
+      {
+        "isGodSpeaking": true,
+        "text": "Je vois là les signes indéniables de la rédemption."
+      },
+      {
+        "isGodSpeaking": true,
+        "text": "Submergé par la souffrance des autres, la voilà qui revient à la raison."
+      },
+      {
+        "isGodSpeaking": true,
+        "text": "Je ne saurai rester impassible face à de telle preuve de repentance."
+      },
+      {
+        "isGodSpeaking": true,
+        "text": "J'accorde mon pardon, révoque mon jugement, et ouvre mes portes à nouveau. Pauvre âme égarée a poursuivis la lumière jusque dans l'autre monde et se voit aujourd'hui récompensée."
+      },
+      {
+        "isGodSpeaking": false,
+        "text": "Quelque chose cloche tout de même..."
+      }
+    ]
+  },
+  {
+    "level": "Level4",
+    "text": [
+      {
+        "isGodSpeaking": true,
+        "text": "Hmmmmm..."
+      },
+      {
+        "isGodSpeaking": false,
+        "text": "Hmmmmm..."
+      },
+      {
+        "isGodSpeaking": true,
+        "text": "Quelque chose cloche en effet..."
+      },
+      {
+        "isGodSpeaking": false,
+        "text": "Une âme si désiquilibrée... Trop niaise pour moi, trop intéressante pour toi..."
+      },
+      {
+        "isGodSpeaking": true,
+        "text": "Mais surtout trop brave pour être laissé errante..."
+      },
+      {
+        "isGodSpeaking": true,
+        "text": "Peut-être devrions no-"
+      }
+    ]
+  },
+  {
+    "level": "Level5",
+    "text": [
+      {
+        "isGodSpeaking": false,
+        "text": "Comment a-t-elle fait ça ?"
+      },
+      {
+        "isGodSpeaking": false,
+        "text": "Personne ne pénètre ma demeure sans y être trainé par mes chaînes !"
+      },
+      {
+        "isGodSpeaking": true,
+        "text": "La noirceur de cette âme corrompue est sans le moindre doute attirrée par ton empire décrépis."
+      },
+      {
+        "isGodSpeaking": false,
+        "text": "Noirceur ?!"
+      },
+      {
+        "isGodSpeaking": false,
+        "text": "Nul n'ose éclairer de la sorte les tréfonds des enfers!"
+      },
+      {
+        "isGodSpeaking": false,
+        "text": "Il n'y a là aucune noirceur ! Juste une bêtise trop grande pour ton royaume de pitre !"
+      },
+      {
+        "isGodSpeaking": true,
+        "text": "Crache donc ton venin: ce n'est plus mon problème."
+      },
+      {
+        "isGodSpeaking": true,
+        "text": "L'âme est à sa place et mes portes sont à nouveau fer-"
+      }
+    ]
+  },
+  {
+    "level": "Level6",
+    "text": [
+      {
+        "isGodSpeaking": true,
+        "text": "Je n'y comprends plus rien!"
+      },
+      {
+        "isGodSpeaking": false,
+        "text": "AH ! Tu vois ce que ça fait maintenant ! Tu aurai peut-être du m'écout-"
+      },
+      {
+        "isGodSpeaking": true,
+        "text": "Pas le temps de nous disputer !"
+      },
+      {
+        "isGodSpeaking": true,
+        "text": "Le paradis est en plen désarois et nous ne savons pas quand lui prendra la folie de réduire nos royaumes en poussière !"
+      },
+      {
+        "isGodSpeaking": false,
+        "text": "Impossible !"
+      },
+      {
+        "isGodSpeaking": false,
+        "text": "Cette âme est peut-être récalcitrante ! Mais je saurai la mater !"
+      },
+      {
+        "isGodSpeaking": true,
+        "text": "Tu n'y arrivera pas sans moi ! Nous devons-"
+      },
+      {
+        "isGodSpeaking": false,
+        "text": "Tombe à nouveau dans le néant ! Foule mon sol, respire mon souffre, et comprends ma fureur !"
+      },
+      {
+        "isGodSpeaking": false,
+        "text": "Aucune âme ne resiste à ma fureur et tu seras brisée que tous avant ! Rentre ici une ennemie et ne ressort jamais !!"
+      }
+    ]
+  }
+]
